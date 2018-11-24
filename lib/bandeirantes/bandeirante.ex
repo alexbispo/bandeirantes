@@ -44,6 +44,27 @@ defmodule Bandeirantes.Bandeirante do
         position: %Bandeirantes.Coordinate{x: 1, y: 3},
         nav_direction: "N"
       }
+
+      iex> {:ok, limit_coordinate} = Bandeirantes.Coordinate.new({5,5})
+      iex> {:ok, initial_coordinate} = Bandeirantes.Coordinate.new({3,3})
+      iex> {:ok, bandeirante} = Bandeirantes.Bandeirante.new(limit_coordinate, initial_coordinate, "E")
+      iex> bandeirante |> 
+      ...> Bandeirantes.Bandeirante.nav("M") |> 
+      ...> Bandeirantes.Bandeirante.nav("M") |>
+      ...> Bandeirantes.Bandeirante.nav("R") |> 
+      ...> Bandeirantes.Bandeirante.nav("M") |>
+      ...> Bandeirantes.Bandeirante.nav("M") |> 
+      ...> Bandeirantes.Bandeirante.nav("R") |>
+      ...> Bandeirantes.Bandeirante.nav("M") |> 
+      ...> Bandeirantes.Bandeirante.nav("R") |>
+      ...> Bandeirantes.Bandeirante.nav("R") |>
+      ...> Bandeirantes.Bandeirante.nav("M")
+      %Bandeirantes.Bandeirante{
+        nav_limit: %Bandeirantes.Coordinate{x: 5, y: 5},
+        position: %Bandeirantes.Coordinate{x: 5, y: 1},
+        nav_direction: "E"
+      }
+
   """
   def nav(%Bandeirante{} = bandeirante, instruction) when instruction in ["L", "R"] do
     {:ok, direction} = bandeirante.nav_direction |> Compass.turn(instruction)
