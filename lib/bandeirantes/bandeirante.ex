@@ -72,7 +72,7 @@ defmodule Bandeirantes.Bandeirante do
   end
 
   def nav(%Bandeirante{} = bandeirante, instruction) when instruction === "M" do
-    new_position = bandeirante.position |> Coordinate.move(bandeirante.nav_direction)
+    new_position = bandeirante.position |> Coordinate.move(bandeirante.nav_direction, bandeirante.nav_limit)
     %{bandeirante | position: new_position}
   end
 end
