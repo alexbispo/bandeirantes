@@ -7,10 +7,7 @@ defmodule Bandeirantes do
   def main(_args \\ []) do
     get_args(:start)
     |> process()
-    |> IO.inspect()
-
-    # |> process
-    # |> puts_response
+    |> puts_response()
   end
 
   defp get_args({:halt, limit, bandeirantes}) do
@@ -19,6 +16,7 @@ defmodule Bandeirantes do
 
   defp get_args(:start) do
     limit = IO.gets("") |> Util.string_to_integer_tuple()
+
     if tuple_size(limit) > 0 do
       get_args({:cont, limit, []})
     else
@@ -27,16 +25,17 @@ defmodule Bandeirantes do
   end
 
   defp get_args({:cont, limit, bandeirantes}) do
-    position = IO.gets("")
-          |> String.split()
-          |> Enum.map(fn e ->
-            result = Integer.parse(e)
-            if result === :error, do: e, else: elem(result, 0)
-          end)
-          |> List.to_tuple()
+    position =
+      IO.gets("")
+      |> String.split()
+      |> Enum.map(fn e ->
+        result = Integer.parse(e)
+        if result === :error, do: e, else: elem(result, 0)
+      end)
+      |> List.to_tuple()
 
     if tuple_size(position) > 0 do
-      instructions = IO.gets("") |> String.trim |> String.graphemes
+      instructions = IO.gets("") |> String.trim() |> String.graphemes()
       bandeirante = {position, instructions}
       bandeirantes = [bandeirante | bandeirantes]
       get_args({:cont, limit, bandeirantes})
@@ -45,27 +44,27 @@ defmodule Bandeirantes do
     end
   end
 
-  # {{5, 5},
-  #  [
-  #    {{"1", "2", "N"}, ["L", "M", "L", "M", "M", "M"]},
-  #    {{"3", "2"}, ["R", "M", "M", "R", "M"]}
-  #  ]}
-  defp process({{max_x, max_y}, [_|_] = bandeirantes}) do
+  defp process({{max_x, max_y}, [_ | _] = bandeirantes}) do
     {:ok, max_coordinate} = Coordinate.new({max_x, max_y})
+
     bandeirantes
     |> Enum.map(fn {{start_x, start_y, start_direction}, instructions} ->
       {:ok, start_coordinate} = {start_x, start_y} |> Coordinate.new()
       {:ok, bandeirante} = Bandeirante.new(max_coordinate, start_coordinate, start_direction)
-      bandeirante = instructions
+
+      bandeirante =
+        instructions
         |> Enum.reduce(bandeirante, fn instruction, go ->
           go
           |> Bandeirante.nav(instruction)
         end)
+
       "#{bandeirante.position.x} #{bandeirante.position.y} #{bandeirante.nav_direction}"
     end)
   end
 
-  # defp puts_response(_something) do
-    
-  # end
+  defp puts_response(response) do
+    response
+    |> Enum.each(&IO.puts/1)
+  end
 end
