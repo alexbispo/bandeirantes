@@ -1,5 +1,4 @@
 defmodule Bandeirantes.Compass do
-
   @doc """
     ## Examples
 

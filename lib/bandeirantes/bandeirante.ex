@@ -1,8 +1,7 @@
 defmodule Bandeirantes.Bandeirante do
-  
   alias Bandeirantes.{Bandeirante, Coordinate, Compass}
 
-  defstruct [:nav_limit, :position, :nav_direction] 
+  defstruct [:nav_limit, :position, :nav_direction]
 
   @doc """
     ## Examples
@@ -72,7 +71,9 @@ defmodule Bandeirantes.Bandeirante do
   end
 
   def nav(%Bandeirante{} = bandeirante, instruction) when instruction === "M" do
-    new_position = bandeirante.position |> Coordinate.move(bandeirante.nav_direction, bandeirante.nav_limit)
+    new_position =
+      bandeirante.position |> Coordinate.move(bandeirante.nav_direction, bandeirante.nav_limit)
+
     %{bandeirante | position: new_position}
   end
 end

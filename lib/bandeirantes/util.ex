@@ -8,7 +8,7 @@ defmodule Bandeirantes.Util do
   """
   def string_to_integer_tuple(str) do
     str
-    |> String.split
+    |> String.split()
     |> Enum.reduce({}, fn str, result ->
       {n, _} = Integer.parse(str)
       Tuple.append(result, n)

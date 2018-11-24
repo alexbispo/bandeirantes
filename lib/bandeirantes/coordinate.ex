@@ -1,11 +1,11 @@
 defmodule Bandeirantes.Coordinate do
   alias __MODULE__
 
-  @enforce_keys [:x, :y] 
+  @enforce_keys [:x, :y]
   defstruct [:x, :y]
 
   @min_position 0
-  
+
   @doc """
     ## Examples
 
@@ -63,22 +63,22 @@ defmodule Bandeirantes.Coordinate do
 
   """
   def move(%Coordinate{x: x, y: y}, "N", %Coordinate{} = max) do
-    with {:ok, new_coordinate} <- Coordinate.new({x, y+1}, {max.x, max.y}),
-      do: new_coordinate
+    with {:ok, new_coordinate} <- Coordinate.new({x, y + 1}, {max.x, max.y}),
+         do: new_coordinate
   end
 
   def move(%Coordinate{x: x, y: y}, "E", %Coordinate{} = max) do
-    with {:ok, new_coordinate} <- Coordinate.new({x+1, y}, {max.x, max.y}),
-      do: new_coordinate
+    with {:ok, new_coordinate} <- Coordinate.new({x + 1, y}, {max.x, max.y}),
+         do: new_coordinate
   end
-  
+
   def move(%Coordinate{x: x, y: y}, "S", %Coordinate{} = max) do
-    with {:ok, new_coordinate} <- Coordinate.new({x, y-1}, {max.x, max.y}),
-      do: new_coordinate
+    with {:ok, new_coordinate} <- Coordinate.new({x, y - 1}, {max.x, max.y}),
+         do: new_coordinate
   end
 
   def move(%Coordinate{x: x, y: y}, "W", %Coordinate{} = max) do
-    with {:ok, new_coordinate} <- Coordinate.new({x-1, y}, {max.x, max.y}),
-      do: new_coordinate
+    with {:ok, new_coordinate} <- Coordinate.new({x - 1, y}, {max.x, max.y}),
+         do: new_coordinate
   end
 end
