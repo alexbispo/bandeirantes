@@ -1,18 +1,16 @@
-# Bandeirantes
+# Why Bandeirantes?
 
-**TODO: Add description**
+Bandeirantes é a denominação dada aos sertanistas do período colonial, que, a partir do início do século XVI, penetraram no interior da América do Sul em busca de riquezas minerais, sobretudo o ouro e a prata, abundantes na América espanhola. Contribuíram, em grande parte, para a expansão territorial do Brasil além dos limites impostos pelo Tratado de Tordesilhas, ocupando o Centro Oeste e o Sul do Brasil. E foram os descobridores do ouro em Minas Gerais, Goiás e Mato Grosso.
+Fonte: [wikipedia](https://pt.wikipedia.org/wiki/Bandeirantes)
 
-## Installation
+## Build
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `bandeirantes` to your list of dependencies in `mix.exs`:
+$ mix escript.build
 
-```elixir
-def deps do
-  [
-    {:bandeirantes, "~> 0.1.0"}
-  ]
-end
+## Run
+
+$ ./bandeirantes
+
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
